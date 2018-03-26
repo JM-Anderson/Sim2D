@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Sim2D.GUI.ParticleSimulator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sim2D.GUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500"
+             xmlns:Particle="clr-namespace:Sim2D.GUI.Particle"
+             xmlns:ToolOptionBars="clr-namespace:Sim2D.GUI.Particle.Tools"
+             >
+    
+    <DockPanel Background="White">
+        <!-- Left Bar -->
+        <DockPanel DockPanel.Dock="Left" Width="26" Background="LightGray" Margin="0, 0, 5, 0">
+            <!-- Tool Bar -->
+            <Particle:Toolbar x:Name="UserToolBar" DockPanel.Dock="Top"/>
+            
+            <Rectangle DockPanel.Dock="Top" Height="5" Fill="White"/>
+            
+            <!-- Function Bar -->
+            <Particle:CommandBar x:Name="CommandBar"/>
+        </DockPanel>
+
+        <!-- Top Bar -->
+        <StackPanel DockPanel.Dock="Top"
+                    Height="26"
+                    Background="LightGray"
+                    Margin="0, 0, 0, 5"
+                    Orientation="Horizontal">
+            <Label x:Name="FPSDisplay" Content="60"
+                   Background="White" Margin="1"
+                   Width="26"/>
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            <StackPanel x:Name="ToolOptionBar"/>
+        </StackPanel>
+
+        <!-- Simulation Canvas -->
+        <Canvas x:Name="SimCanvas"
+                Background="LightGray"/>
+    </DockPanel>
+</UserControl>

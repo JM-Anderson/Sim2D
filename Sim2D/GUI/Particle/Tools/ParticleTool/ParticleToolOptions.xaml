@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Sim2D.GUI.Particle.Tools.ParticleToolOptions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sim2D.GUI.Particle.Tools"
+             mc:Ignorable="d" 
+             d:DesignHeight="26" d:DesignWidth="1066.867"
+             xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="4, 2, 4, 2"/>
+                </Style>
+                <Style TargetType="wpfTool:DoubleUpDown">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="60"/>
+                </Style>
+                <Style TargetType="wpfTool:IntegerUpDown">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="60"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <!-- Position -->
+            <Label Content="Position:"/>
+            <wpfTool:DoubleUpDown x:Name="XUpDown"
+                                  Value="100" DefaultValue="100" Minimum="1"/>
+            <Separator Margin="5"/>
+            <wpfTool:DoubleUpDown x:Name="YUpDown"
+                                  Value="100" DefaultValue="100" Minimum="1"/>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 0, 0"/>
+
+            <!-- Velocity -->
+            <Label Content="Velocity:"/>
+            <wpfTool:DoubleUpDown x:Name="VelXUpDown" Value="0" DefaultValue="0"/>
+            <Separator Margin="5"/>
+            <wpfTool:DoubleUpDown x:Name="VelYUpDown" Value="0"  DefaultValue="0"/>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
+            
+            <!-- Radius -->
+            <Label Content="Radius:"/>
+            <wpfTool:DoubleUpDown x:Name="RadUpDown" Value="5" Minimum="1" Maximum="100"/>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
+
+            <!-- Mass -->
+            <Label Content="Mass:"/>
+            <wpfTool:DoubleUpDown x:Name="MassUpDown" Value="10" Minimum="0.1" Maximum="1000"/>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
+
+            <!-- Charge -->
+            <Label Content="Charge:"/>
+            <wpfTool:IntegerUpDown x:Name="ChargeUpDown" Value="0" DefaultValue="0"/>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
+
+            <!-- Color -->
+            <Border x:Name="ParticleColorDisplay"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Width="45"
+                    Height="22"
+                    Background="Red"/>
+            <Separator Margin="5"/>
+            <wpfTool:DropDownButton Margin="0, 2">
+                <wpfTool:DropDownButton.DropDownContent>
+                    <wpfTool:ColorCanvas x:Name="ParticleColorCanvas"
+                                         SelectedColor="Red"
+                                         SelectedColorChanged="ColorCanvas_SelectedColorChanged"
+                                         MaxHeight="140"/>
+                </wpfTool:DropDownButton.DropDownContent>
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text=" &#xE790;"/>
+            </wpfTool:DropDownButton>
+
+            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
+
+            <!-- Spawn -->
+            <Button x:Name="SpawnButton" Click="SpawnButton_Click" Content="Spawn"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

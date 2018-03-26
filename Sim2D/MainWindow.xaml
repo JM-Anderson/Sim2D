@@ -1,0 +1,20 @@
+﻿<Window x:Class="Sim2D.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sim2D"
+        xmlns:gui="clr-namespace:Sim2D.GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" MinHeight="350" MinWidth="525">
+    <Grid>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
+            <TabItem Header="Particle Simulator" x:Name="ParticleSimTab">
+                <gui:ParticleSimulator x:Name="ParticleSim"/>
+            </TabItem>
+            <TabItem Header="Sand Simulator" x:Name="SandSimTab">
+                <gui:SandSimulator x:Name="SandSim"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
