@@ -9,10 +9,18 @@
              xmlns:Particle="clr-namespace:Sim2D.GUI.Particle"
              xmlns:ToolOptionBars="clr-namespace:Sim2D.GUI.Particle.Tools"
              >
-    
+
     <DockPanel Background="White">
         <!-- Left Bar -->
-        <DockPanel DockPanel.Dock="Left" Width="26" Background="LightGray" Margin="0, 0, 5, 0">
+        <DockPanel DockPanel.Dock="Left"
+                   Width="26"
+                   Background="LightGray"
+                   Margin="0, 0, 5, 0">
+            <Button DockPanel.Dock="Top" Height="26" x:Name="SettingsButton"
+                    FontFamily="Segoe MDL2 Assets" Content="&#xE713;"/>
+
+            <Rectangle DockPanel.Dock="Top" Height="5" Fill="White"/>
+            
             <!-- Tool Bar -->
             <Particle:Toolbar x:Name="UserToolBar" DockPanel.Dock="Top"/>
             
@@ -28,6 +36,7 @@
                     Background="LightGray"
                     Margin="0, 0, 0, 5"
                     Orientation="Horizontal">
+
             <Label x:Name="FPSDisplay" Content="60"
                    Background="White" Margin="1"
                    Width="26"/>
@@ -36,7 +45,6 @@
         </StackPanel>
 
         <!-- Simulation Canvas -->
-        <Canvas x:Name="SimCanvas"
-                Background="LightGray"/>
+        <Canvas x:Name="SimCanvas" Background="LightGray" ClipToBounds="True"/>
     </DockPanel>
 </UserControl>

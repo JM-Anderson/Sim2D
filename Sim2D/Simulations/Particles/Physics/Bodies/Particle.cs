@@ -26,9 +26,10 @@ namespace Sim2D.Simulations.Particles.Physics.Bodies
         /// Moves the particle forward in time by the specified amount using the particle's velocity
         /// </summary>
         /// <param name="dt">Time to simulate</param>
-        public void SimMove(double dt)
+        /// <param name="trackMove">Whether or not to track this move - Used for trails</param>
+        public void SimMove(double dt, bool trackMove = true)
         {
-            Move(Velocity.X * dt, Velocity.Y * dt);
+            Move(Velocity.X * dt, Velocity.Y * dt, trackMove);
         }
 
         public void ApplyAcceleration(double dt)

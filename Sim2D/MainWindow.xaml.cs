@@ -23,6 +23,28 @@ namespace Sim2D
         public MainWindow()
         {
             InitializeComponent();
+
+            KeyDown += KeyPressed;
+        }
+
+        private bool windowMaximized = false;
+        private void KeyPressed(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11)
+            {
+                if (windowMaximized)
+                {
+                    WindowStyle = WindowStyle.SingleBorderWindow;
+                    WindowState = WindowState.Normal;
+                    windowMaximized = false;
+                }
+                else
+                {
+                    WindowStyle = WindowStyle.None;
+                    WindowState = WindowState.Maximized;
+                    windowMaximized = true;
+                }
+            }
         }
 
         bool pSimWasPaused = false;

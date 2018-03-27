@@ -17,6 +17,9 @@
                 </Style>
             </StackPanel.Resources>
 
+            <Label FontFamily="Segoe MDL2 Assets" Content="&#xE8A1;"/>
+            <Separator Margin="0, 0, 0, 5"/>
+
             <Button x:Name="DeleteAllButton" Content="&#xE74D;" ToolTip="!CAUTION! - Clear everything"/>
             <Button x:Name="PauseButton" Content="&#xE769;" ToolTip="Pause the simulation"/>
             <Button x:Name="PlayButton" Content="&#xE768;" ToolTip="Start the simulation"/>

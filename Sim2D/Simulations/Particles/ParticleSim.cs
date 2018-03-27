@@ -26,10 +26,6 @@ namespace Sim2D.Simulations.Particles
         private Canvas simCanvas;
         private GraphicsManager graphicsManager;
 
-        // FPS
-        private DateTime lastFrameTime = DateTime.Now;
-        public double lastDeltaT { get; private set; } = 0;
-
         // Physics
         private BodyManager bodyManager;
         private SimEngine simEngine;
@@ -48,17 +44,9 @@ namespace Sim2D.Simulations.Particles
         }
 
         // Main Loop
-        public void NextFrame(double? interval = null)
+        public void NextFrame(double interval)
         {
-            // Find new frame time and delta T
-            DateTime currentFrameTime = DateTime.Now;
-            double deltaT = (currentFrameTime - lastFrameTime).TotalSeconds;
-
-            // Store frame time and delta T for use next frame
-            lastFrameTime = currentFrameTime;
-            lastDeltaT = deltaT;
-
-            simEngine.Update(interval ?? deltaT);
+            simEngine.Update(interval);
         }
 
         // Spawning bodies
@@ -77,6 +65,17 @@ namespace Sim2D.Simulations.Particles
             foreach (Rigidbody body in allBodies)
             {
                 body.Delete();
+            }
+        }
+
+        private bool ParticleTrails = false;
+        public void ToggleTrails()
+        {
+            ParticleTrails = !ParticleTrails;
+
+            foreach(Rigidbody body in bodyManager.bodies)
+            {
+                body.HasTrail = ParticleTrails;
             }
         }
     }

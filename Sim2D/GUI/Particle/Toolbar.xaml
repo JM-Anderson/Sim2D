@@ -6,21 +6,20 @@
              xmlns:local="clr-namespace:Sim2D.GUI.Particle"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="26">
-    <Grid>
+    <Border Padding="2, 2, 2, 4">
         <StackPanel>
             <!-- Style -->
             <StackPanel.Resources>
                 <Style TargetType="ToggleButton">
-                    <Setter Property="Margin" Value="3, 5, 3, 0"/>
-                    <Setter Property="Height" Value="20"/>
-                    <Setter Property="Width" Value="20"/>
+                    <Setter Property="Margin" Value="0, 5, 0, 0"/>
+                    <Setter Property="Height" Value="22"/>
                     <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
                 </Style>
             </StackPanel.Resources>
 
             <!-- Toolbar icon-->
             <Label FontFamily="Segoe MDL2 Assets" Content="&#xE90F;"
-                       HorizontalAlignment="Center" Margin="0, 3, 0, 0"/>
+                       HorizontalAlignment="Center"/>
 
             <Separator/>
 
@@ -33,8 +32,6 @@
             <!-- Eraser button -->
             <ToggleButton x:Name="EraserButton" Click="ToolSelected"
                           Content="&#xE75C;" ToolTip="Erase particles"/>
-
-            <Separator Background="{x:Null}"/>
         </StackPanel>
-    </Grid>
+    </Border>
 </UserControl>

@@ -11,9 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.ComponentModel;
 using System.Windows.Shapes;
 
 using Sim2D.GUI.Particle.Tools;
+using Sim2D.GUI.Particle;
 using Sim2D.Simulations.Particles;
 using Sim2D.Simulations.Particles.Physics.Bodies;
 
@@ -25,13 +27,15 @@ namespace Sim2D.GUI
     public partial class ParticleSimulator : UserControl
     {
         private ParticleSim particleSim;
+        private SettingsWindow settingsWindow;
 
-        public double? timeInterval = null;
         public bool paused = false;
 
         public ParticleSimulator()
         {
             InitializeComponent();
+
+            Application.Current.MainWindow.Closing += OnClosing;
 
             // Initialize simulation
             particleSim = new ParticleSim(SimCanvas);
@@ -40,18 +44,32 @@ namespace Sim2D.GUI
             UserToolBar.Setup(SimCanvas, particleSim, ToolOptionBar);
             CommandBar.Setup(particleSim, this);
 
+            // Setup settings window
+            settingsWindow = new SettingsWindow(this, particleSim);
+            settingsWindow.Activated += SettingsWindowActivated;
+            SettingsButton.Click += (s, e) => settingsWindow.Show();
+
             // Capture render loop to use as main simulation loop
             CompositionTarget.Rendering += (s, e) => MainLoop();
         }
 
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            settingsWindow.Show();
+            settingsWindow.Close();
+        }
+        private void SettingsWindowActivated(object sender, EventArgs e)
+        {
+            settingsWindow.Owner = Application.Current.MainWindow;
+            settingsWindow.Activated -= SettingsWindowActivated;
+        }
+
         private void MainLoop()
         {
-            double? dt = timeInterval;
+            SimTime simTime = settingsWindow.GetTime();
 
-            if (paused) dt = 0;
-
-            particleSim.NextFrame(dt);
-            FPSDisplay.Content = (int)(1 / particleSim.lastDeltaT);
+            particleSim.NextFrame((paused) ? 0 : simTime.TimeInterval);
+            FPSDisplay.Content = (int)(simTime.FPS);
         }
     }
 }

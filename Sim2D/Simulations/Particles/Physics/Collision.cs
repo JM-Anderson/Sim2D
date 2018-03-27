@@ -64,28 +64,17 @@ namespace Sim2D.Simulations.Particles.Physics
             return false;
         }
 
-        // Determine if two circular rigid bodies are colliding
-        public static bool AreColliding(Rigidbody b1, Rigidbody b2)
-        {
-            double xDist = b1.X - b2.X;
-            double yDist = b1.Y - b2.Y;
-
-            double distSqr = xDist * xDist + yDist * yDist; // This is more efficient than Math.Pow
-            double radiiSum = b1.radius + b2.radius;
-
-            return distSqr < radiiSum * radiiSum;
-        }
-
         // Particle to particle handling
         public static bool HandleCollision(Particle p1, Particle p2)
         {
             double collTime = CalcCollTime(p1, p2);
             if (Double.IsNaN(collTime) || Math.Abs(collTime) > p1.timeLeft || Math.Abs(collTime) > p2.timeLeft) return false;
 
-            p1.SimMove(collTime);
-            p2.SimMove(collTime);
+            p1.SimMove(collTime, false);
+            p2.SimMove(collTime, false);
 
             Tuple<Vector, Vector> exitVels = CalcExitVelocities(p1, p2);
+            if (exitVels is null) return false;
 
             p1.Velocity = exitVels.Item1;
             p2.Velocity = exitVels.Item2;
@@ -103,6 +92,9 @@ namespace Sim2D.Simulations.Particles.Physics
 
             // distance between both particles squared
             double distSqr = dx * dx + dy * dy;
+
+            // Particles are directly on top of one another - skip calculations
+            if (distSqr == 0) return null;
 
             // Calculate differences in velocity
             double dVelX = p1.Velocity.X - p2.Velocity.X;

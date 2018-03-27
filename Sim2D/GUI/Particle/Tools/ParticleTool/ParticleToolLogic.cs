@@ -41,6 +41,7 @@ namespace Sim2D.GUI.Particle.Tools
                 Stroke = new SolidColorBrush(Colors.Red),
                 StrokeThickness = 2,
                 Visibility = Visibility.Hidden,
+                StrokeStartLineCap = PenLineCap.Triangle,
 
                 X1 = 0,
                 Y1 = 0,

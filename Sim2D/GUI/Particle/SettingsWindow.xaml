@@ -1,0 +1,38 @@
+﻿<Window x:Class="Sim2D.GUI.Particle.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sim2D.GUI.Particle"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"
+        Title="Settings" Height="300" MinHeight="300" Width="300" MaxWidth="300" MinWidth="300">
+    <StackPanel Margin="5, 0">
+        <StackPanel.Resources>
+            <Style TargetType="StackPanel"  x:Key="SettingGroup">
+                <Setter Property="Margin" Value="0, 5, 0, 5"/>
+            </Style>
+        </StackPanel.Resources>
+        
+        <!-- Time step -->
+        <StackPanel Style="{StaticResource SettingGroup}">
+            <Label Content="Time step (ms)" FontWeight="Bold"/>
+            <Separator/>
+            <DockPanel>
+                <CheckBox x:Name="RealTimeCheckBox" Content="Real time"
+                      DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5, 0"
+                      IsChecked="True"/>
+                <wpfTool:DoubleUpDown x:Name="TimeStepUpDown" IsEnabled="False"
+                                  DefaultValue="0" Value=".5" Minimum="0"/>
+            </DockPanel>
+        </StackPanel>
+
+        <!-- Particle trails -->
+        <StackPanel Style="{StaticResource SettingGroup}">
+            <Label Content="Particle Trails" FontWeight="Bold"/>
+            <Separator/>
+            <ToggleButton x:Name="TrailsToggleButton" Content="Off"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

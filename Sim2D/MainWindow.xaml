@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sim2D"
         xmlns:gui="clr-namespace:Sim2D.GUI"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="350" MinWidth="525">
+        Title="Simulator 2D" MinHeight="350" MinWidth="525">
     <Grid>
         <TabControl SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Particle Simulator" x:Name="ParticleSimTab">

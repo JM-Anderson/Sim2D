@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,6 +83,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Particle\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Particle\Toolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +119,9 @@
     <Compile Include="GUI\Particle\Commands\ICommand.cs" />
     <Compile Include="GUI\Particle\Commands\Pause.cs" />
     <Compile Include="GUI\Particle\Commands\Play.cs" />
+    <Compile Include="GUI\Particle\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Particle\Toolbar.xaml.cs">
       <DependentUpon>Toolbar.xaml</DependentUpon>
     </Compile>
@@ -140,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Simulations\Particles\Graphics\ShapeProperties.cs" />
+    <Compile Include="Simulations\Particles\Graphics\Trail.cs" />
     <Compile Include="Simulations\Particles\Optimizations\Organization\BoundingBoxes.cs" />
     <Compile Include="Simulations\Particles\Optimizations\Organization\IOrginization.cs" />
     <Compile Include="Simulations\Particles\Optimizations\Organization\SpatialGrid.cs" />
@@ -185,6 +196,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
