@@ -8,6 +8,6 @@ namespace Sim2D.GUI.Particle.Tools
 {
     public enum ToolType
     {
-        Particle, Erase, None
+        Particle, Erase, LinearForce, None
     }
 }

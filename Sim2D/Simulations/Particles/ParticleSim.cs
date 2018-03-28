@@ -26,9 +26,49 @@ namespace Sim2D.Simulations.Particles
         private Canvas simCanvas;
         private GraphicsManager graphicsManager;
 
+        // Particle trail settings
+        private bool ParticleTrails = false;
+        private int _trailLength = 120;
+        public int TrailLength
+        {
+            get { return _trailLength; }
+            set
+            {
+                foreach (Rigidbody body in bodyManager.bodies)
+                {
+                    body.TrailLength = value;
+                }
+                _trailLength = value;
+            }
+        }
+
         // Physics
         private BodyManager bodyManager;
         private SimEngine simEngine;
+
+        // Electro Magnetic force settings
+        private ElectroMagneticState elecMagState = ElectroMagneticState.Normal;
+        public ElectroMagneticState ElectroMagneticState
+        {
+            get
+            {
+                return elecMagState;
+            }
+            set
+            {
+                foreach (Rigidbody body in bodyManager.bodies)
+                {
+                    foreach (IForce force in body.ExternalForces)
+                    {
+                        if (force.GetForceType() == Forces.ElectroMagnetic)
+                        {
+                            (force as ElectroMagnetic).MagneticState = value;
+                        }
+                    }
+                }
+                elecMagState = value;
+            }
+        }
 
         /*
          * Methods
@@ -53,9 +93,19 @@ namespace Sim2D.Simulations.Particles
         public void CreateBody(RigidbodyProperties properties)
         {
             Rigidbody newBody = bodyManager.CreateBody(properties);
+            if (ParticleTrails) newBody.HasTrail = true;
 
             // Add electromagnetic force
-            newBody.ExternalForces.Add(new ElectroMagnetic(newBody));
+            newBody.ExternalForces.Add(new ElectroMagnetic(newBody)
+            {
+                MagneticState = ElectroMagneticState
+            });
+        }
+
+        // Spawning linear forces
+        public void SpawnForce(Linear force)
+        {
+            simEngine.worldForces.Add(force);
         }
 
         // Deleting bodies
@@ -66,9 +116,11 @@ namespace Sim2D.Simulations.Particles
             {
                 body.Delete();
             }
+
+            simEngine.worldForces = new List<IForce>();
         }
 
-        private bool ParticleTrails = false;
+        // Toggle particle trails
         public void ToggleTrails()
         {
             ParticleTrails = !ParticleTrails;
@@ -77,6 +129,12 @@ namespace Sim2D.Simulations.Particles
             {
                 body.HasTrail = ParticleTrails;
             }
+        }
+
+        // Toggle particle / rigidbody collisions
+        public void ToggleCollisions()
+        {
+            simEngine.RigidbodyCollisions = !simEngine.RigidbodyCollisions;
         }
     }
 }

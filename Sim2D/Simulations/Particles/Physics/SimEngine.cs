@@ -17,6 +17,11 @@ namespace Sim2D.Simulations.Particles.Physics
         private BodyManager bodyManager;
         private Vector ContainerSize { get { return bodyManager.graphicsManager.CanvasSize; } }
 
+        public bool RigidbodyCollisions = true;
+
+        // Forces that apply to everything
+        public List<IForce> worldForces = new List<IForce>();
+
         public SimEngine(BodyManager bodyManager)
         {
             this.bodyManager = bodyManager;
@@ -38,11 +43,17 @@ namespace Sim2D.Simulations.Particles.Physics
             {
                 p.timeLeft = dt;
 
-                // Update acceleration
+                // Update acceleration from particle forces
                 foreach (IForce force in p.ExternalForces)
                 {
                     force.ApplyOn(allParticles);
                 }
+            }
+
+            // Update acceleration from world forces
+            foreach (IForce force in worldForces)
+            {
+                force.ApplyOn(allParticles);
             }
 
             // Apply acceleration - Update velocity based on current particle positions
@@ -54,17 +65,20 @@ namespace Sim2D.Simulations.Particles.Physics
                 p.Acceleration = new Vector(0, 0);
             }
 
-            // Organize bodies to avoid unnecessary calculations
-            IOrginization organization = new BoundingBoxes(bodyManager.bodies);
-            //IOrginization organization = new SpatialGrid(bodyManager.bodies, 10);
-            var organizedBodies = organization.Organize();
-
-            // Handle particle particle collisions
-            foreach (List<Rigidbody> nearBodies in organizedBodies)
+            if (RigidbodyCollisions)
             {
-                if (nearBodies.Count > 1)
+                // Organize bodies to avoid unnecessary calculations
+                IOrginization organization = new BoundingBoxes(bodyManager.bodies);
+                //IOrginization organization = new SpatialGrid(bodyManager.bodies, 10);
+                var organizedBodies = organization.Organize();
+
+                // Handle particle particle collisions
+                foreach (List<Rigidbody> nearBodies in organizedBodies)
                 {
-                    new Collision(nearBodies[0], nearBodies[1], dt).Resolve();
+                    if (nearBodies.Count > 1)
+                    {
+                        new Collision(nearBodies[0], nearBodies[1], dt).Resolve();
+                    }
                 }
             }
 

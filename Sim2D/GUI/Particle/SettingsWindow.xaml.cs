@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 
 using Sim2D.Simulations.Particles;
+using Sim2D.Simulations.Particles.Physics.Forces;
 
 namespace Sim2D.GUI.Particle
 {
@@ -45,10 +46,37 @@ namespace Sim2D.GUI.Particle
 
             // Register events
             Closing += OnClosing;
+
             TrailsToggleButton.Click += (s, e) =>
             {
                 particleSim.ToggleTrails();
-                TrailsToggleButton.Content = (TrailsToggleButton.IsChecked ?? false) ? "On" : "Off";
+                if (TrailsToggleButton.IsChecked ?? false)
+                {
+                    TrailsToggleButton.Content = "On";
+                    TrailLengthSlider.IsEnabled = true;
+                }
+                else
+                {
+                    TrailsToggleButton.Content = "Off";
+                    TrailLengthSlider.IsEnabled = false;
+                }
+            };
+            TrailLengthSlider.ValueChanged += (s, e) =>
+            {
+                int newLength = (int)e.NewValue;
+                TrailLengthLabel.Content = newLength;
+                particleSim.TrailLength = newLength;
+            };
+
+            ParticleCollToggleButton.Click += (s, e) =>
+            {
+                particleSim.ToggleCollisions();
+                ParticleCollToggleButton.Content = (ParticleCollToggleButton.IsChecked ?? true) ? "On" : "Off";
+            };
+
+            ElecMagStateComboBox.SelectionChanged += (s, e) =>
+            {
+                particleSim.ElectroMagneticState = (ElectroMagneticState)ElecMagStateComboBox.SelectedIndex;
             };
 
             // Time interval events

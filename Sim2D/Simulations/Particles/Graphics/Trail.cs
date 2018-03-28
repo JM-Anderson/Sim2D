@@ -16,18 +16,18 @@ namespace Sim2D.Simulations.Particles.Graphics
         private Canvas canvas;
 
         private Polyline polyline;
-        private PointCollection points = new PointCollection();
 
         public int TargetLength
         {
-            get
-            {
-                return _targetLength;
-            }
+            get { return _targetLength; }
             set
             {
                 _targetLength = value;
                 correctLength = false;
+
+                if (polyline is null) return;
+                while (polyline.Points.Count >= value)
+                    polyline.Points.RemoveAt(0);
             }
         }
         private int _targetLength;
@@ -44,7 +44,7 @@ namespace Sim2D.Simulations.Particles.Graphics
             {
                 Stroke = new SolidColorBrush(shape2D.color),
                 StrokeThickness = 1,
-                Points = points
+                Points = new PointCollection()
             };
 
             shape2D.OnDelete += (s, e) => Delete();
@@ -58,15 +58,15 @@ namespace Sim2D.Simulations.Particles.Graphics
 
         public void AddPoint(double X, double Y)
         {
-            points.Add(new Point(X, canvas.ActualHeight - Y));
+            polyline.Points.Add(new Point(X, canvas.ActualHeight - Y));
         }
 
         private void ShapeMoved(object sender, ShapeMoveEventArgs e)
         {
             AddPoint(e.NewX, e.NewY);
             if (correctLength)
-                points.RemoveAt(0);
-            else if (points.Count == TargetLength)
+                polyline.Points.RemoveAt(0);
+            else if (polyline.Points.Count == TargetLength)
                 correctLength = true;
         }
 
@@ -85,10 +85,10 @@ namespace Sim2D.Simulations.Particles.Graphics
 
         public void Reset()
         {
-            while (points.Count > 0)
-            {
-                points.RemoveAt(0);
-            }
+            if (polyline is null) return;
+            
+            polyline.Points = new PointCollection();
+
             correctLength = false;
         }
 

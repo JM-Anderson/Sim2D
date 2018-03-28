@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 
 using Sim2D.GUI.Particle.Tools;
-
+using Sim2D.GUI.Particle.Tools.LinearForceTool;
 using Sim2D.Simulations.Particles;
 
 namespace Sim2D.GUI.Particle
@@ -52,11 +52,13 @@ namespace Sim2D.GUI.Particle
             // Track buttons in dictionary
             toolButtons.Add(ToolType.Particle, ParticleButton);
             toolButtons.Add(ToolType.Erase, EraserButton);
+            toolButtons.Add(ToolType.LinearForce, LinearForceButton);
 
             // Initialize tools
             RegisterTools(
                 new ParticleToolLogic(simCanvas, particleSim),
-                new EraseToolLogic()
+                new EraseToolLogic(),
+                new LinearForceLogic(simCanvas, particleSim)
                 );
 
             // Select tool to begin with

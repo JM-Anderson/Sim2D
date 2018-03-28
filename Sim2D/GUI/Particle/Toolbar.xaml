@@ -29,6 +29,10 @@
             <ToggleButton x:Name="ParticleButton" Click="ToolSelected"
                           Content="&#xEA3B;" ToolTip="Spawn particles"/>
 
+            <!-- Linear Force button -->
+            <ToggleButton x:Name="LinearForceButton" Click="ToolSelected"
+                          Content="&#xE896;" ToolTip="Spawn Linear Forces"/>
+
             <!-- Eraser button -->
             <ToggleButton x:Name="EraserButton" Click="ToolSelected"
                           Content="&#xE75C;" ToolTip="Erase particles"/>

@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="GUI\Particle\Tools\LinearForceTool\LinearForceOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\Particle\Tools\ParticleTool\ParticleToolOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,6 +132,10 @@
     <Compile Include="GUI\Particle\Tools\EraseTool\EraseToolLogic.cs" />
     <Compile Include="GUI\Particle\Tools\EraseTool\EraseToolOptions.xaml.cs">
       <DependentUpon>EraseToolOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Particle\Tools\LinearForceTool\LinearForceLogic.cs" />
+    <Compile Include="GUI\Particle\Tools\LinearForceTool\LinearForceOptions.xaml.cs">
+      <DependentUpon>LinearForceOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Particle\Tools\ParticleTool\ParticleToolLogic.cs" />
     <Compile Include="GUI\Particle\Tools\ParticleTool\ParticleToolOptions.xaml.cs">
@@ -164,6 +172,7 @@
     <Compile Include="Simulations\Particles\Physics\Collision.cs" />
     <Compile Include="Simulations\Particles\Physics\Forces\ElectroMagnetic.cs" />
     <Compile Include="Simulations\Particles\Physics\Forces\IForce.cs" />
+    <Compile Include="Simulations\Particles\Physics\Forces\Linear.cs" />
     <Compile Include="Simulations\Particles\Physics\SimEngine.cs" />
     <Compile Include="Simulations\Particles\Utilities\Direction.cs" />
     <Compile Include="Simulations\Sand\Grains\BaseGrain.cs" />

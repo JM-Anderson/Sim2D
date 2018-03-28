@@ -45,6 +45,11 @@ namespace Sim2D.Simulations.Particles.Graphics
                 }
             }
         }
+        public int TrailLength
+        {
+            get { return trail.TargetLength; }
+            set { trail.TargetLength = value; }
+        }
 
         public readonly double radius;
 

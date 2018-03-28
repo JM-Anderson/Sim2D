@@ -22,6 +22,8 @@ namespace Sim2D.GUI.Particle.Tools
     /// </summary>
     public partial class ParticleToolOptions : UserControl
     {
+        private static Random randomGen = new Random();
+
         public ParticleToolOptions()
         {
             InitializeComponent();
@@ -37,7 +39,7 @@ namespace Sim2D.GUI.Particle.Tools
         {
             get
             {
-                return new ParticleProperties
+                ParticleProperties properties = new ParticleProperties
                 (
                     X: XUpDown.Value ?? 100,
                     Y: YUpDown.Value ?? 100,
@@ -50,6 +52,19 @@ namespace Sim2D.GUI.Particle.Tools
                     radius: RadUpDown.Value ?? 5,
                     color: ParticleColorCanvas.SelectedColor ?? Colors.Red
                 );
+
+                if (RandomColorCheckBox.IsChecked ?? false)
+                {
+                    ParticleColorCanvas.SelectedColor = new Color()
+                    {
+                        R = (byte)randomGen.Next(0, 256),
+                        G = (byte)randomGen.Next(0, 256),
+                        B = (byte)randomGen.Next(0, 256),
+                        A = 255
+                    };
+                }
+
+                return properties;
             }
         }
 

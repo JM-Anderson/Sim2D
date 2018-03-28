@@ -32,7 +32,40 @@
         <StackPanel Style="{StaticResource SettingGroup}">
             <Label Content="Particle Trails" FontWeight="Bold"/>
             <Separator/>
-            <ToggleButton x:Name="TrailsToggleButton" Content="Off"/>
+            <DockPanel>
+                <ToggleButton x:Name="TrailsToggleButton" Content="Off"
+                              Width="50" DockPanel.Dock="Right" Margin="0, 0, 5, 0"/>
+                <Label Content="Frames:"/>
+                <Label x:Name="TrailLengthLabel" Content="120"
+                       DockPanel.Dock="Left" VerticalAlignment="Center" Width="30"/>
+                <Slider x:Name="TrailLengthSlider" IsEnabled="False"
+                        Minimum="1" Maximum="800" Value="120"
+                        Margin="0, 0, 5, 0" VerticalAlignment="Center"/>
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource SettingGroup}">
+            <Label Content="Electro Magnetic" FontWeight="Bold"/>
+            <Separator/>
+            <DockPanel>
+                <Label Content="Type of attraction:"/>
+                <ComboBox x:Name="ElecMagStateComboBox" SelectedIndex="0"
+                          Margin="5, 0, 5, 0">
+                    <ComboBoxItem Content="Normal"/>
+                    <ComboBoxItem Content="All Repel"/>
+                    <ComboBoxItem Content="All Attract"/>
+                </ComboBox>
+            </DockPanel>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource SettingGroup}">
+            <Label Content="Collisions" FontWeight="Bold"/>
+            <Separator/>
+            <DockPanel>
+                <ToggleButton x:Name="ParticleCollToggleButton" Content="On" IsChecked="True"
+                              Width="50" DockPanel.Dock="Right" Margin="0, 0, 5, 0"/>
+                <Label Content="Particle Collisions:"/>
+            </DockPanel>
         </StackPanel>
     </StackPanel>
 </Window>
