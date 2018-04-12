@@ -29,7 +29,6 @@ namespace Sim2D.GUI.Particle.Tools.LinearForceTool
             StrokeDashCap = PenLineCap.Triangle,
             StrokeDashArray = new DoubleCollection() { 3 }
         };
-        private bool dragged;
 
         public LinearForceLogic(Canvas simCanvas, ParticleSim particleSim)
         {
@@ -40,6 +39,8 @@ namespace Sim2D.GUI.Particle.Tools.LinearForceTool
             OptionBar = new LinearForceOptions();
 
             (OptionBar as LinearForceOptions).SpawnButton.Click += SpawnButton_Click;
+
+            Panel.SetZIndex(forcePreviewLine, 900);
 
             simCanvas.Children.Add(forcePreviewLine);
         }
@@ -54,8 +55,6 @@ namespace Sim2D.GUI.Particle.Tools.LinearForceTool
 
         public override void LeftMouseDown(object sender, MouseEventArgs e)
         {
-            dragged = false;
-
             forcePreviewLine.Visibility = Visibility.Visible;
 
             Point mousePos = e.GetPosition(simCanvas);
@@ -67,23 +66,25 @@ namespace Sim2D.GUI.Particle.Tools.LinearForceTool
         }
         public override void LeftMouseDragging(object sender, MouseEventArgs e)
         {
-            dragged = true;
-
             Point mousePos = e.GetPosition(simCanvas);
             forcePreviewLine.X2 = mousePos.X;
             forcePreviewLine.Y2 = mousePos.Y;
         }
         public override void LeftMouseUp(object sender, MouseEventArgs e)
         {
+            Vector vector = new Vector(
+                x: forcePreviewLine.X2 - forcePreviewLine.X1,
+                y: forcePreviewLine.Y1 - forcePreviewLine.Y2
+                );
+
             particleSim.SpawnForce(new Linear(
-                X: forcePreviewLine.X2 - forcePreviewLine.X1,
-                Y: forcePreviewLine.Y1 - forcePreviewLine.Y2,
+                forceVector: vector,
                 massDependent: (OptionBar as LinearForceOptions).MassDependent
                 ));
 
-            forcePreviewLine.Visibility = Visibility.Hidden;
+            (OptionBar as LinearForceOptions).ForceVector = vector;
 
-            dragged = false;
+            forcePreviewLine.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -31,20 +31,24 @@
         </DockPanel>
 
         <!-- Top Bar -->
-        <StackPanel DockPanel.Dock="Top"
-                    Height="26"
-                    Background="LightGray"
-                    Margin="0, 0, 0, 5"
-                    Orientation="Horizontal">
-
+        <DockPanel x:Name="TopBarDockPanel"
+                   DockPanel.Dock="Top" Height="26"
+                   Margin="0, 0, 0, 5" Background="LightGray">
             <Label x:Name="FPSDisplay" Content="60"
                    Background="White" Margin="1"
                    Width="26"/>
             <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-            <StackPanel x:Name="ToolOptionBar"/>
-        </StackPanel>
+            <ScrollViewer x:Name="OptionBarScrollViewer"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="ToolOptionBar"/>
+            </ScrollViewer>
+        </DockPanel>
 
         <!-- Simulation Canvas -->
-        <Canvas x:Name="SimCanvas" Background="LightGray" ClipToBounds="True"/>
+        <Canvas x:Name="SimCanvas" Background="LightGray" ClipToBounds="True">
+            <Label x:Name="PausedLabel" Content="Paused"
+                   Canvas.Bottom="5" Canvas.Right="5" Background="#B2FFFFFF"/>
+        </Canvas>
     </DockPanel>
 </UserControl>

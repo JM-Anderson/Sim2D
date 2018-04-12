@@ -24,7 +24,11 @@
             <Separator/>
 
             <!-- Buttons -->
-            
+
+            <!-- Eraser button -->
+            <ToggleButton x:Name="SelectButton" Click="ToolSelected"
+                          Content="&#xEF20;" ToolTip="Select objects"/>
+
             <!-- Particle button -->
             <ToggleButton x:Name="ParticleButton" Click="ToolSelected"
                           Content="&#xEA3B;" ToolTip="Spawn particles"/>
@@ -33,9 +37,9 @@
             <ToggleButton x:Name="LinearForceButton" Click="ToolSelected"
                           Content="&#xE896;" ToolTip="Spawn Linear Forces"/>
 
-            <!-- Eraser button -->
-            <ToggleButton x:Name="EraserButton" Click="ToolSelected"
-                          Content="&#xE75C;" ToolTip="Erase particles"/>
+            <!-- Linear Force button -->
+            <ToggleButton x:Name="RulerButton" Click="ToolSelected"
+                          Content="&#xED5E;" ToolTip="Measure length"/>
         </StackPanel>
     </Border>
 </UserControl>

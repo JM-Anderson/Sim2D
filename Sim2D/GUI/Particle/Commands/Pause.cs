@@ -21,7 +21,7 @@ namespace Sim2D.GUI.Particle.Commands
 
         public void Run()
         {
-            simGUI.paused = true;
+            simGUI.Paused = true;
         }
     }
 }

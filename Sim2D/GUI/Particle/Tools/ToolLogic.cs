@@ -14,6 +14,16 @@ namespace Sim2D.GUI.Particle.Tools
 
         public UserControl OptionBar;
 
+        public virtual void Selected()
+        {
+
+        }
+
+        public virtual void Unselected()
+        {
+
+        }
+
         public virtual void LeftMouseDown(object sender, MouseEventArgs e)
         {
 

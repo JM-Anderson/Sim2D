@@ -27,6 +27,14 @@ namespace Sim2D.GUI.Particle.Tools
         public ParticleToolOptions()
         {
             InitializeComponent();
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += CurrentDomain_UnhandledException; ;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(e.ExceptionObject);
         }
 
         public event RoutedEventHandler SpawnButtonClick;

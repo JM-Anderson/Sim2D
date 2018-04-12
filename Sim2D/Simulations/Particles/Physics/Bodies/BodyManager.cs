@@ -17,6 +17,8 @@ namespace Sim2D.Simulations.Particles.Physics.Bodies
         public List<Rigidbody> bodies = new List<Rigidbody>();
         public List<Particle> particles = new List<Particle>();
 
+        private int bodyCounter = 0;
+
         public BodyManager(GraphicsManager graphicsManager)
         {
             this.graphicsManager = graphicsManager;
@@ -37,11 +39,15 @@ namespace Sim2D.Simulations.Particles.Physics.Bodies
             else
                 newBody = new Rigidbody(bodyGraphic, properties);
 
+            newBody.UID = bodyCounter;
+
             // Hook into the Delete event of the body to remove the body from this manager when it is deleted
             newBody.OnDelete += BodyDeleted;
 
             // Track body
             bodies.Add(newBody);
+
+            bodyCounter++;
 
             return newBody;
         }
@@ -57,6 +63,9 @@ namespace Sim2D.Simulations.Particles.Physics.Bodies
             {
                 particles.Remove((Particle)senderBody);
             }
+
+            if (bodies.Count == 0)
+                bodyCounter = 0;
         }
     }
 }

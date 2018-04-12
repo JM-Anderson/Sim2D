@@ -31,11 +31,24 @@ namespace Sim2D.GUI.Particle.Tools.LinearForceTool
         public Vector ForceVector
         {
             get { return new Vector(XUpDown.Value ?? 0, YUpDown.Value ?? 0); }
+            set
+            {
+                XUpDown.Value = value.X;
+                YUpDown.Value = value.Y;
+            }
         }
 
         public LinearForceOptions()
         {
             InitializeComponent();
+
+            MassDependentCheckBox.Checked += IsMassDependentChanged;
+            MassDependentCheckBox.Unchecked += IsMassDependentChanged;
+        }
+
+        private void IsMassDependentChanged(object sender, RoutedEventArgs e)
+        {
+            LinearTypeTextBlock.Text = (MassDependent) ? "force" : "acceleration";
         }
     }
 }

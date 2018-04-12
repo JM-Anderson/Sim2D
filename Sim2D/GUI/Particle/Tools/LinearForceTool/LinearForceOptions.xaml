@@ -22,13 +22,7 @@
 
             <!-- X magnitude -->
             <StackPanel Orientation="Horizontal">
-                <Label>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="X "/>
-                        <TextBlock Text="acceleration"/>
-                        <TextBlock Text=":"/>
-                    </StackPanel>
-                </Label>
+                <Label Content="X:"/>
 
                 <wpfTool:DoubleUpDown x:Name="XUpDown" Value="0" DefaultValue="0"/>
             </StackPanel>
@@ -36,13 +30,7 @@
             
             <!-- Y magnitude -->
             <StackPanel Orientation="Horizontal">
-                <Label>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Y "/>
-                        <TextBlock Text="acceleration"/>
-                        <TextBlock Text=":"/>
-                    </StackPanel>
-                </Label>
+                <Label Content="Y:"/>
 
                 <wpfTool:DoubleUpDown x:Name="YUpDown" Value="0" DefaultValue="0"/>
             </StackPanel>
@@ -50,7 +38,12 @@
             <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="5, 0, 5, 0"/>
 
             <!-- Spawn button -->
-            <Button x:Name="SpawnButton" Content="Spawn"/>
+            <Button x:Name="SpawnButton">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Spawn "/>
+                    <TextBlock x:Name="LinearTypeTextBlock" Text="acceleration"/>
+                </StackPanel>
+            </Button>
 
             <Separator Margin="3"/>
 

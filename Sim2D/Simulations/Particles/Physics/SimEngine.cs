@@ -59,7 +59,7 @@ namespace Sim2D.Simulations.Particles.Physics
             // Apply acceleration - Update velocity based on current particle positions
             foreach (Particle p in allParticles)
             {
-                // Apply acceleration
+                // Apply acceleration - updates velocity based on acceleration and time step
                 p.ApplyAcceleration(dt);
 
                 p.Acceleration = new Vector(0, 0);
@@ -93,7 +93,8 @@ namespace Sim2D.Simulations.Particles.Physics
                         break;
                 }
 
-                p.SimMove(p.timeLeft);
+                if (p.timeLeft != 0)
+                    p.SimMove(p.timeLeft);
 
                 // Check if particle is out of bounds - if so -> place in bounds
                 if (p.Y > ContainerSize.Y - p.radius)

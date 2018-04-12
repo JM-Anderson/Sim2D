@@ -91,15 +91,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\Particle\Tools\EraseTool\EraseToolOptions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="GUI\Particle\Tools\LinearForceTool\LinearForceOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\Particle\Tools\ParticleTool\ParticleToolOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Particle\Tools\RulerTool\RulerOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Particle\Tools\SelectTool\SelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\Particle\Tools\SelectTool\SelectOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,10 +137,6 @@
     <Compile Include="GUI\Particle\Toolbar.xaml.cs">
       <DependentUpon>Toolbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Particle\Tools\EraseTool\EraseToolLogic.cs" />
-    <Compile Include="GUI\Particle\Tools\EraseTool\EraseToolOptions.xaml.cs">
-      <DependentUpon>EraseToolOptions.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GUI\Particle\Tools\LinearForceTool\LinearForceLogic.cs" />
     <Compile Include="GUI\Particle\Tools\LinearForceTool\LinearForceOptions.xaml.cs">
       <DependentUpon>LinearForceOptions.xaml</DependentUpon>
@@ -140,6 +144,17 @@
     <Compile Include="GUI\Particle\Tools\ParticleTool\ParticleToolLogic.cs" />
     <Compile Include="GUI\Particle\Tools\ParticleTool\ParticleToolOptions.xaml.cs">
       <DependentUpon>ParticleToolOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Particle\Tools\RulerTool\RulerLogic.cs" />
+    <Compile Include="GUI\Particle\Tools\RulerTool\RulerOptions.xaml.cs">
+      <DependentUpon>RulerOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Particle\Tools\SelectTool\SelectionWindow.xaml.cs">
+      <DependentUpon>SelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\Particle\Tools\SelectTool\SelectLogic.cs" />
+    <Compile Include="GUI\Particle\Tools\SelectTool\SelectOptions.xaml.cs">
+      <DependentUpon>SelectOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="GUI\Particle\Tools\ToolLogic.cs" />
     <Compile Include="GUI\Particle\Tools\ToolType.cs" />
@@ -208,5 +223,6 @@
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

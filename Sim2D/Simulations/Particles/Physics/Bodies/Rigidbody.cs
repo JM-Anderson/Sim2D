@@ -16,6 +16,7 @@ namespace Sim2D.Simulations.Particles.Physics.Bodies
         // Physics properties
         public readonly BodyType BodyType;
         public readonly int Charge;
+        public int UID;
 
         // Forces originating from this body
         public List<IForce> ExternalForces = new List<IForce>();

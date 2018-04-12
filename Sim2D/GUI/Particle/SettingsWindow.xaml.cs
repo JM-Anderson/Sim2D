@@ -49,17 +49,11 @@ namespace Sim2D.GUI.Particle
 
             TrailsToggleButton.Click += (s, e) =>
             {
-                particleSim.ToggleTrails();
-                if (TrailsToggleButton.IsChecked ?? false)
-                {
-                    TrailsToggleButton.Content = "On";
-                    TrailLengthSlider.IsEnabled = true;
-                }
-                else
-                {
-                    TrailsToggleButton.Content = "Off";
-                    TrailLengthSlider.IsEnabled = false;
-                }
+                bool trailsOn = TrailsToggleButton.IsChecked ?? false;
+
+                particleSim.ParticleTrailsOn = trailsOn;
+                TrailsToggleButton.Content = (trailsOn) ? "On" : "Off";
+                TrailLengthSlider.IsEnabled = trailsOn;
             };
             TrailLengthSlider.ValueChanged += (s, e) =>
             {
@@ -70,8 +64,10 @@ namespace Sim2D.GUI.Particle
 
             ParticleCollToggleButton.Click += (s, e) =>
             {
-                particleSim.ToggleCollisions();
-                ParticleCollToggleButton.Content = (ParticleCollToggleButton.IsChecked ?? true) ? "On" : "Off";
+                bool collisionsOn = ParticleCollToggleButton.IsChecked ?? true;
+
+                particleSim.CollisionsOn = collisionsOn;
+                ParticleCollToggleButton.Content = (collisionsOn) ? "On" : "Off";
             };
 
             ElecMagStateComboBox.SelectionChanged += (s, e) =>

@@ -16,6 +16,8 @@ using System.Windows.Controls.Primitives;
 
 using Sim2D.GUI.Particle.Tools;
 using Sim2D.GUI.Particle.Tools.LinearForceTool;
+using Sim2D.GUI.Particle.Tools.RulerTool;
+using Sim2D.GUI.Particle.Tools.SelectTool;
 using Sim2D.Simulations.Particles;
 
 namespace Sim2D.GUI.Particle
@@ -51,14 +53,16 @@ namespace Sim2D.GUI.Particle
 
             // Track buttons in dictionary
             toolButtons.Add(ToolType.Particle, ParticleButton);
-            toolButtons.Add(ToolType.Erase, EraserButton);
+            toolButtons.Add(ToolType.Ruler, RulerButton);
+            toolButtons.Add(ToolType.Select, SelectButton);
             toolButtons.Add(ToolType.LinearForce, LinearForceButton);
 
             // Initialize tools
             RegisterTools(
                 new ParticleToolLogic(simCanvas, particleSim),
-                new EraseToolLogic(),
-                new LinearForceLogic(simCanvas, particleSim)
+                new LinearForceLogic(simCanvas, particleSim),
+                new RulerLogic(simCanvas),
+                new SelectLogic(simCanvas, particleSim)
                 );
 
             // Select tool to begin with
@@ -104,13 +108,18 @@ namespace Sim2D.GUI.Particle
             {
                 if (toolItem.Value != button)
                 {
-                    toolItem.Value.IsChecked = false;
-                    userTools[toolItem.Key].OptionBar.Visibility = Visibility.Collapsed;
+                    if (toolItem.Value.IsChecked == true)
+                    {
+                        toolItem.Value.IsChecked = false;
+                        userTools[toolItem.Key].OptionBar.Visibility = Visibility.Collapsed;
+                        userTools[toolItem.Key].Unselected();
+                    }
                 }
                 else
                 {
                     toolItem.Value.IsChecked = true;
                     userTools[toolItem.Key].OptionBar.Visibility = Visibility.Visible;
+                    userTools[toolItem.Key].Selected();
                     SelectedTool = toolItem.Key;
                 }
             }

@@ -52,14 +52,14 @@ namespace Sim2D
         {
             if (ParticleSimTab.IsSelected)
             {
-                ParticleSim.paused = pSimWasPaused;
+                ParticleSim.Paused = pSimWasPaused;
                 SandSim.paused = true;
             }
             else if (SandSimTab.IsSelected)
             {
-                pSimWasPaused = ParticleSim.paused;
+                pSimWasPaused = ParticleSim.Paused;
 
-                ParticleSim.paused = true;
+                ParticleSim.Paused = true;
                 SandSim.paused = false;
             }
         }

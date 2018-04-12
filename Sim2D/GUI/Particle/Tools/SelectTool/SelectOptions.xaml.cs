@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Sim2D.GUI.Particle.Tools.EraseTool
+namespace Sim2D.GUI.Particle.Tools.SelectTool
 {
     /// <summary>
-    /// Interaction logic for EraseToolOptions.xaml
+    /// Interaction logic for SelectOptions.xaml
     /// </summary>
-    public partial class EraseToolOptions : UserControl
+    public partial class SelectOptions : UserControl
     {
-        public EraseToolOptions()
+        public SelectOptions()
         {
             InitializeComponent();
         }

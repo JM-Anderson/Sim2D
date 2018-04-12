@@ -46,6 +46,7 @@ namespace Sim2D.Simulations.Particles.Graphics
                 StrokeThickness = 1,
                 Points = new PointCollection()
             };
+            Panel.SetZIndex(polyline, -1);
 
             shape2D.OnDelete += (s, e) => Delete();
         }

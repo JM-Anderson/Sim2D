@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 using Sim2D.GUI.Particle.Tools;
 using Sim2D.GUI.Particle;
@@ -29,7 +30,16 @@ namespace Sim2D.GUI
         private ParticleSim particleSim;
         private SettingsWindow settingsWindow;
 
-        public bool paused = false;
+        private bool paused = false;
+        public bool Paused
+        {
+            get { return paused; }
+            set
+            {
+                paused = value;
+                PausedLabel.Visibility = (value) ? Visibility.Visible : Visibility.Hidden;
+            }
+        }
 
         public ParticleSimulator()
         {
@@ -43,16 +53,31 @@ namespace Sim2D.GUI
             // Setup toolbar + commandbar
             UserToolBar.Setup(SimCanvas, particleSim, ToolOptionBar);
             CommandBar.Setup(particleSim, this);
+            TopBarDockPanel.PreviewMouseWheel += (s, e) =>
+            {
+                if (e.Delta < 0)
+                    OptionBarScrollViewer.LineRight();
+                else
+                    OptionBarScrollViewer.LineLeft();
+                e.Handled = true;
+            };
 
             // Setup settings window
             settingsWindow = new SettingsWindow(this, particleSim);
             settingsWindow.Activated += SettingsWindowActivated;
-            SettingsButton.Click += (s, e) => settingsWindow.Show();
+            SettingsButton.Click += (s, e) =>
+            {
+                if (settingsWindow.IsVisible)
+                    settingsWindow.Hide();
+                else
+                    settingsWindow.Show();
+            };
 
             // Capture render loop to use as main simulation loop
             CompositionTarget.Rendering += (s, e) => MainLoop();
         }
 
+        // UI Events
         private void OnClosing(object sender, CancelEventArgs e)
         {
             settingsWindow.Show();

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Sim2D.GUI.Particle.Tools.SelectTool.SelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sim2D.GUI.Particle.Tools.SelectTool"
+        mc:Ignorable="d"
+        Title="Selection" Closing="Window_Closing"
+        WindowStyle="ToolWindow" ShowInTaskbar="False"
+        MinHeight="300" MaxWidth="300" MinWidth="300" Width="300">
+    <DockPanel>
+        <!-- Selected item properties -->
+            <StackPanel x:Name="PropertiesPanel" Height="200" DockPanel.Dock="Bottom">
+                
+            </StackPanel>
+
+            <Separator Margin="10" DockPanel.Dock="Bottom"/>
+
+        <ScrollViewer MinHeight="200" VerticalScrollBarVisibility="Auto">
+            <!-- Selected item list -->
+            <ListView x:Name="SelectedItemView"/>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

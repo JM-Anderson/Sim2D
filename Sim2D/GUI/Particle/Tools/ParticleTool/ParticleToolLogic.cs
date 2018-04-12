@@ -100,6 +100,8 @@ namespace Sim2D.GUI.Particle.Tools
         }
         private void EndParticlePreview()
         {
+            if (particlePreviewProps is null) return;
+
             if (mouseDragged)
             {
                 particlePreviewProps.velocity = new Vector(velPreview.X2 - velPreview.X1, velPreview.Y1 - velPreview.Y2);
