@@ -1,3 +1,8 @@
-## 2D Particle Simulator
+# 2D Particle Simulator
 
-#Features
+## Main Features
+
+* Time manipulation
+* Continuous particle collisions
+* Particle repulsion/attraction with Coulomb's Law
+* Particle properties manipulation
