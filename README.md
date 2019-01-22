@@ -1,1 +1,3 @@
-# Simulations and stuff in 2D
+## 2D Particle Simulator
+
+#Features
